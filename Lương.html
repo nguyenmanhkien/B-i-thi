@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="costApp" ng-controller="CostController">
+    <b>Tính thưởng tết:</b>
+    <div>Số lương hiện tại:  <input type="number" min="0" ng-model="luong" required></div>
+    <div>Số năm làm tại công ty: <input type="number" min="0" ng-model="nam" required></div>
+    <div>
+        <b>Thưởng</b>
+        <span>
+            {{thuong | currency: 'VNĐ'}}
+        </span>
+        <button class="btn" ng-click="pay()">Tính</button>
+    </div>
+    <script>
+        var app = angular.module('costApp',[]);
+        app.controller('CostController', function ($scope){
+            $scope.luong = 0;
+            $scope.nam = 0;
+            $scope.thuong = 0;
+            $scope.pay = function (){
+                if ($scope.nam < 5){
+                    this.thuong = this.luong * 3 * 9/10
+                }
+                if (5 < $scope.nam && $scope.nam < 10){
+                    this.thuong = this.luong * 6 * 9/10
+                }
+                if ($scope.nam > 10){
+                    this.thuong = this.luong * 12 * 9/10
+                }
+            };
+        })
+    </script>
+</div>
+</body>
+</html>
